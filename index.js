@@ -38,7 +38,10 @@ var jwtCheck = jwt({
 const briefings = require('./rest/briefings');
 const twilioSms = require('./rest/twilio-sms');
 
-
+app.get('/healthcheck',(req,res)=>{
+    res.status(200);
+    res.end();
+});
 app.post('/sms', twilioSms)
 
 //enables auth for all routes below this
