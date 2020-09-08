@@ -5,7 +5,7 @@ const socket = require('../websocket')();
 //webhook for twilio SMS
 const twilioSmsHandler = (req, res) => {
     if (client.validateRequest(config.twilio.authToken, req.headers['x-twilio-signature'], config.twilio.webhookEndpoint, req.body)) {
-
+        console.log('valid sms request');
         //parse message, ex: "Sent from your Twilio trial account - {\"text\":\"load\",\"userSessionId\":\"Ms-INqtdsyaAIWOpAAAA\"}\nHaha I'm glad you had fun"
         const body = req.body.Body;
         const index = body.indexOf('userSessionId');
@@ -20,6 +20,7 @@ const twilioSmsHandler = (req, res) => {
 
         res.status(200);
     } else {
+        console.log('invalid sms request');
         res.status(401);
     }
     res.end();
