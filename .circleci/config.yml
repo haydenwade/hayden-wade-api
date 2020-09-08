@@ -21,6 +21,8 @@ jobs:
   build-image:
     docker:
       - image: circleci/node:12
+    setup_remote_docker:
+      version: 19.03.12
     steps:
       - checkout
       - aws-ecr/build-image:
