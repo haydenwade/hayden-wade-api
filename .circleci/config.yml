@@ -1,13 +1,12 @@
-version: 2.1
-
 orbs:
   aws-ecr: circleci/aws-ecr@6.12.2
+version: 2.1
 
 workflows:
   ci:
     jobs:
-      - aws-ecr/build-and-push-image:
-        context: Production
+      - aws-ecr/build-image:
+          context: Production
   cd:
     jobs:
       - aws-ecr/build-and-push-image:
