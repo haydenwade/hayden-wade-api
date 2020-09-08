@@ -1,0 +1,20 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+
+workflows:
+  ci:
+    jobs:
+      - aws-ecr/build-and-push-image:
+        context: Production
+  cd:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          context: Production
+          create-repo: true
+          repo: hayden-wade-api
+          tag: latest
+          filter:
+            branches:
+              only: master
