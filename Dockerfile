@@ -1,11 +1,12 @@
 FROM node:12
 
-WORKDIR /usr/src/app
+ADD . /usr/src/app
 
+WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
 
 EXPOSE 3000
 
-RUN npm run start
+CMD ["node","index.js"]

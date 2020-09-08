@@ -20,7 +20,9 @@ const config = {
     },
     twilio:{
         from: process.env.TWILIO_FROM,
-        to: process.env.TWILIO_TO
+        to: process.env.TWILIO_TO,
+        authToken: process.env.TWILIO_AUTH_TOKEN,
+        webhookEndpoint: process.env.TWILIO_WEBHOOK_ENDPOINT || 'https://fc1a36a8a70c.ngrok.io/sms'
     }
 };
 

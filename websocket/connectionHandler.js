@@ -31,7 +31,10 @@ const connectionHandler = (socket) => {
                 console.log('no response lets text hayden')
                 //TODO: emit "typing event" - needs ui to implement
                 tc.messages.create({
-                    body: data.text,
+                    body: JSON.stringify({
+                        text: data.text,
+                        userSessionId: socket.id
+                    }),
                     from: config.twilio.from,
                     to: config.twilio.to
                 }).then(message => {

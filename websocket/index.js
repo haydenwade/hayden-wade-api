@@ -8,5 +8,11 @@ class SocketIO {
     }
 }
 
-
-module.exports = SocketIO;
+let instance;
+const createInstance = (server)=>{
+    if(!instance){
+        instance = new SocketIO(server);
+    }
+    return instance;
+}
+module.exports = createInstance;
