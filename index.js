@@ -7,7 +7,7 @@ const config = require('./config');
 
 //init websocket
 const io = require('./websocket');
-new io(server);
+io(server);
 
 //Request libs
 const bodyParser = require('body-parser');
@@ -18,6 +18,7 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 var jwtCheck = jwt({
