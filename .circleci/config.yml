@@ -23,3 +23,5 @@ jobs:
       - image: circleci/node:12
     steps:
       - aws-ecr/build-image
+          repo: hayden-wade-api
+          tag: latest
