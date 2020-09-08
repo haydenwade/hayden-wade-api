@@ -5,7 +5,7 @@ version: 2.1
 workflows:
   ci:
     jobs:
-      - aws-ecr/build-image:
+      - build-image:
           context: Production
   cd:
     jobs:
@@ -17,3 +17,9 @@ workflows:
           filter:
             branches:
               only: master
+jobs:
+  build-image:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - aws-ecr:/build-image
