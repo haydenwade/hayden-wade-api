@@ -18,12 +18,12 @@ workflows:
           filters:
             branches:
               only: master
-     - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: 'hayden-wade-api'
-          cluster-name: 'default'
-          container-image-name-updates: 'container=hayden-wade-api,tag=latest'
+      - aws-ecs/deploy-service-update:
+            requires:
+              - aws-ecr/build-and-push-image
+            family: 'hayden-wade-api'
+            cluster-name: 'default'
+            container-image-name-updates: 'container=hayden-wade-api,tag=latest'
 jobs:
   build-image:
     docker:
