@@ -19,6 +19,7 @@ workflows:
             branches:
               only: master
       - aws-ecs/deploy-service-update:
+            context: Production
             requires:
               - aws-ecr/build-and-push-image
             family: 'hayden-wade-api'
