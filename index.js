@@ -56,6 +56,7 @@ app.use(function (req, res, next) {
 
 //start the server
 server.listen(config.port);
+console.log(`listening on port: ${config.port}`)
 
 process.on('unhandledRejection', (err) => {
     if(err.stack.indexOf('aws-sdk')  !== -1 && err.message === 'TimeoutError'){
