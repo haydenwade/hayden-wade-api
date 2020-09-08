@@ -14,7 +14,7 @@ workflows:
           create-repo: true
           repo: hayden-wade-api
           tag: latest
-          filter:
+          filters:
             branches:
               only: master
 jobs:
