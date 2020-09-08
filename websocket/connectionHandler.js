@@ -39,11 +39,15 @@ const connectionHandler = (socket) => {
                     to: config.twilio.to
                 }).then(message => {
                     if(!message.errorCode && !message.errorMessage){
-                        setInterval(() => {
+                        const interval = setInterval(() => {
                             tc.calls(message.sid).fetch().then(call => {
                                 console.log('polling call:', call)
                             })
-                        }, 10000)
+                        }, 10000);
+                        
+                        setTimeout(()=>{
+                            clearInterval(interval)
+                        },600000) //10 minutes
                     }
                 });
             }
