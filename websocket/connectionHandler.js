@@ -1,6 +1,8 @@
 const config = require('../config');
 const tc = require('twilio')(config.awsAmplify.accountSid, config.awsAmplify.authToken);
 const { Amplify, Interactions } = require('aws-amplify');
+const x = require('./io');
+const io = x();
 
 Amplify.configure({
     Auth: {
@@ -29,7 +31,6 @@ const connectionHandler = (socket) => {
                 socket.emit('event', { text: res.message })
             } else {
                 console.log('no response lets text hayden')
-                //TODO: emit "typing event" - needs ui to implement
                 tc.messages.create({
                     body: JSON.stringify({
                         text: data.text,
@@ -37,24 +38,12 @@ const connectionHandler = (socket) => {
                     }),
                     from: config.twilio.from,
                     to: config.twilio.to
-                }).then(message => {
-                    if(!message.errorCode && !message.errorMessage){
-                        const interval = setInterval(() => {
-                            tc.calls(message.sid).fetch().then(call => {
-                                console.log('polling call:', call)
-                            })
-                        }, 10000);
-                        
-                        setTimeout(()=>{
-                            clearInterval(interval)
-                        },600000) //10 minutes
-                    }
                 });
+                io.setWaitingForText(socket.id);
             }
-
         }
         catch (err) {
-            console.log('boom', err)
+            console.log(err)
         }
 
     });

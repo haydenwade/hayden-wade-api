@@ -6,7 +6,7 @@ const server = require('http').createServer(app);
 const config = require('./config');
 
 //init websocket
-const io = require('./websocket');
+const io = require('./websocket/io');
 io(server);
 
 //Request libs

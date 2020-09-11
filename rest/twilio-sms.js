@@ -1,6 +1,6 @@
 const client = require('twilio');
 const config = require('../config');
-const socket = require('../websocket')();
+const socket = require('../websocket/io')();
 
 //webhook for twilio SMS
 const twilioSmsHandler = (req, res) => {
@@ -17,6 +17,7 @@ const twilioSmsHandler = (req, res) => {
 
         //emit event to websocket
         socket.io.to(userSessionId).emit('event', { text: msg });
+        socket.clearWaitingForText(userSessionId);
 
         res.status(200);
     } else {
